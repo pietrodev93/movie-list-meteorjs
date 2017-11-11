@@ -1,0 +1,120 @@
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+  <nav class="red">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">MovieManager</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+  
+            <li class="nav-item">
+              <a class="waves-effect waves-light btn modal-trigger" href="#addModal">Add Movie</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="center">Your Movies List!</h1>
+<div cass="row">
+  <table class="striped">
+  <thead>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>
+        Year
+        </th>
+        <th>
+          
+        </th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each movies}}
+        {{> movie}}
+      {{/each}}
+    </tbody>
+  </table>
+    </div>
+
+  </div>
+  {{> add}}
+  <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
+    $('.datepicker').pickadate({
+   selectMonths: true, // Creates a dropdown to control month
+   selectYears: 15, // Creates a dropdown of 15 years to control year,
+   today: 'Today',
+   clear: 'Clear',
+   close: 'Ok',
+   closeOnSelect: false // Close upon selecting a date,
+ });
+  </script>
+</body>
+
+
+
+<template name="movie">
+
+    <tr>
+      <td>{{text}}</td>
+      <td>{{cat}}</td>
+      <td>{{price}} $</td>
+      <td>
+        {{year}}
+      </td>
+      <td>
+        <a href="#" class="delete-note secondary-content"><i class="material-icons">close</i></a>
+      </td>
+    </tr>
+  
+</template>
+
+<template name="add">
+  <!-- Modal Structure -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <h3>Add Movie</h3>
+      <form class="add-form">
+        <div class="input-field">
+          <label for="text" data-error="wrong" data-success="right">Movie Title</label>
+          <input id="text" type="text" name="text" class="validate">
+          <br />
+
+        </div>
+        
+        <br />
+        <select id="category" name="cat" class="browser-default">
+          <option value="" disabled selected>Choose the Category</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Crime">Crime</option>
+          <option value="Family">Family</option>
+          <option value="Horror">Horror</option>
+        </select>
+        <br />
+        <div class="input-field">
+          <input name="year" type="text" class="datepicker">
+          <label for="year" data-error="wrong" data-success="right">Year</label>
+          <p id="test-slider" class="range-field">
+            <label for="test5">Price</label><br />
+            <input  name="price" type="range" id="test5" min="0" max="100" />
+          </p>
+          <button class="btn-floating btn-large waves-effect waves-light red" type="submit" name="action">
+            <i class="material-icons right">add</i>
+          </button>
+        </div>
+        
+        
+        
+      </form>
+
+    </div>
+  </div>
+</template>
